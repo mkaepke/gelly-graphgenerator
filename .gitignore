@@ -70,7 +70,6 @@ hs_err_pid*
 /target/
 /graphgenerator.iml
 .DS_Store
-.gitignore
 .idea/
 generatedGraph/
 graphgenerator.iml
