@@ -95,11 +95,11 @@ public class RMatGenerator implements Serializable {
    *
    * @param outputPath
    */
-  private void writeCsv(String outputPath) {
+  private void writeCsv(String outputPath) throws Exception {
     DataSet<Vertex<Double, NullValue>> vertexDataSet = graph.getVertices();
     DataSet<Edge<Double, Double>> edgeDataSet = graph.getEdges();
 
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH:mm");
     Date date = new Date();
     if(!outputPath.endsWith("/")) {
       outputPath = outputPath.concat("/");
@@ -107,11 +107,11 @@ public class RMatGenerator implements Serializable {
     outputPath = outputPath.concat(sdf.format(date) + "/");
 
     vertexDataSet
-        .writeAsCsv(outputPath + "vertices.csv", WriteMode.OVERWRITE)
+        .writeAsCsv(outputPath + "vertices_" + graph.numberOfVertices() + ".csv", WriteMode.OVERWRITE)
         .name("writeGeneratedVertexCSV")
         .setParallelism(1);
     edgeDataSet
-        .writeAsCsv(outputPath + "edges.csv", WriteMode.OVERWRITE)
+        .writeAsCsv(outputPath + "edges_" + graph.numberOfEdges() + ".csv", WriteMode.OVERWRITE)
         .name("writeGeneratedEdgeCSV")
         .setParallelism(1);
 
